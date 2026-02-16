@@ -2,10 +2,10 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    opts = {
-      ensure_installed = { "python", "lua", "vim", "vimdoc", "bash" },
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
+    event = "VeryLazy",
+    config = function()
+      -- Install parsers via command - run :TSInstall python lua vim vimdoc bash
+      -- Or use :TSInstall all for common parsers
+    end,
   },
 }

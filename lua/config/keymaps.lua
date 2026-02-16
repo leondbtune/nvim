@@ -2,11 +2,6 @@ local function map(m, k, v)
 	vim.keymap.set(m, k, v, { noremap = true, silent = true })
 end
 
--- Set leader
-map("", "<Space>", "<Nop>")
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Nvim-tree
 map("n", "<leader>t", ":NvimTreeOpen<CR>")
 map("n", "<C-n>", ":NvimTreeClose<CR>")
@@ -23,3 +18,17 @@ vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 
 -- black python formatting
 vim.keymap.set("n", "<leader>fmp", ":silent !black %<cr>")
+
+-- LSP keymaps (set when LSP attaches to a buffer)
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  end,
+})
