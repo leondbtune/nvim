@@ -11,8 +11,8 @@ return { {
     settings = {
       hooks = {
         on_venv_activate = function()
-          -- Restart pyright to pick up the new venv
-          vim.cmd("LspRestart pyright")
+          -- Restart basedpyright to pick up the new venv
+          vim.cmd("LspRestart basedpyright")
         end,
       },
     },

@@ -1,5 +1,5 @@
 return {
-  cmd = { "pyright-langserver", "--stdio" },
+  cmd = { "basedpyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = {
     "pyproject.toml",
@@ -16,6 +16,20 @@ return {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
         diagnosticMode = "openFilesOnly",
+        typeCheckingMode = "basic",
+        extraPaths = { "./src" },
+        exclude = {
+          "**/.git",
+          "**/.mypy_cache",
+          "**/.pytest_cache",
+          "**/__pycache__",
+          "**/migrations",
+          "**/node_modules",
+          "**/venv",
+          "**/venv.old",
+          "**/debug",
+          "**/scripts",
+        },
         diagnosticSeverityOverrides = {
           reportPrivateImportUsage = "none",
         },
