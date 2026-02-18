@@ -22,6 +22,7 @@ return {
           telescope = true,
           nvimtree = true,
           mason = true,
+          alpha = true,
         },
       })
       vim.cmd.colorscheme("catppuccin")
