@@ -5,7 +5,7 @@ return {
       "stevearc/conform.nvim",
       opts = {
         formatters_by_ft = {
-          python = { "isort", "black" },
+          python = { "isort", "ruff_format" },
           javascript = { "eslint_d" },
         },
         format_on_save = {

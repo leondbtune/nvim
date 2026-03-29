@@ -1,5 +1,5 @@
 return {
-  cmd = { "basedpyright-langserver", "--stdio" },
+  cmd = { "pyright-langserver", "--stdio", "--threads", "4" },
   filetypes = { "python" },
   root_markers = {
     "pyproject.toml",
@@ -11,6 +11,7 @@ return {
     ".git",
   },
   settings = {
+    disableTaggedHints = true,
     python = {
       analysis = {
         autoSearchPaths = true,

@@ -3,7 +3,8 @@ local options = {
 	number = true,
 	tabstop = 4,
 	shiftwidth = 4,
-	expandtab = true
+	expandtab = true,
+	autoread = true,
 }
 
 
@@ -14,6 +15,11 @@ end
 vim.diagnostic.config({
 	signs = false,
 	virtual_text = true,
+})
+
+-- Auto-reload files changed externally (e.g. by Claude Code)
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+	command = "checktime",
 })
 
 -- Enable treesitter highlighting for supported filetypes

@@ -13,11 +13,17 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
--- yank to clipboard
+-- yank/paste to/from system clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({"n", "v"}, "<leader>p", [["+p]])
 
--- black python formatting
-vim.keymap.set("n", "<leader>fmp", ":silent !black %<cr>")
+-- copy filepath to clipboard
+vim.keymap.set("n", "<leader>cp", function()
+	vim.fn.setreg("+", vim.fn.expand("%:."))
+end, { desc = "Copy relative filepath to clipboard" })
+
+-- ruff python formatting
+vim.keymap.set("n", "<leader>fmp", ":silent !ruff format %<cr>")
 
 -- LSP keymaps (set when LSP attaches to a buffer)
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -30,6 +36,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
   end,
 })
 

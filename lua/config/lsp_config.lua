@@ -1,7 +1,8 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "basedpyright" },
+    ensure_installed = { "pyright", "ruff" },
 })
 vim.lsp.enable({
-    "basedpyright"
+    "pyright",
+    "ruff",
 })
