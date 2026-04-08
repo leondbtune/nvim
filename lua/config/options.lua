@@ -13,6 +13,10 @@ for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
+-- Make window separators more visible
+vim.opt.laststatus = 3
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#838ba7", bold = true })
+
 vim.diagnostic.config({
 	signs = false,
 	virtual_text = true,
