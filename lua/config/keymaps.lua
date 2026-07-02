@@ -36,11 +36,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
     vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
   end,
 })
+
+-- Auto-fix (remove unused imports) on save for Python via Ruff
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.py",
+  callback = function()
+    vim.lsp.buf.code_action({
+      context = { only = { "source.fixAll.ruff" }, diagnostics = {} },
+      apply = true,
+    })
+  end,
+})
+
+-- Render Markdown toggle
+map("n", "<leader>md", ":RenderMarkdown toggle<CR>")
 
 -- DAP (Debug Adapter Protocol) keymaps
 map("n", "<F5>", ":lua require'dap'.continue()<CR>")

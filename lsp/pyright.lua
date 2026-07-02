@@ -16,8 +16,8 @@ return {
       analysis = {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
-        diagnosticMode = "openFilesOnly",
-        typeCheckingMode = "basic",
+        diagnosticMode = "workspace",
+        typeCheckingMode = "off",
         extraPaths = { "./src" },
         exclude = {
           "**/.git",
@@ -33,6 +33,7 @@ return {
         },
         diagnosticSeverityOverrides = {
           reportPrivateImportUsage = "none",
+          reportReturnType = "none",
         },
       },
     },
